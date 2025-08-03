@@ -1,0 +1,25 @@
+SELECT
+  o.Date AS order_date,
+  pc.CategoryName AS category_name,
+  p.ProdName AS product_name,
+  p.Price AS product_price,
+  o.Quantity AS order_qty,
+  (p.Price * o.Quantity) AS total_sales,
+  c.CustomerEmail AS cust_email,
+  c.CustomerCity AS cust_city
+FROM
+  `bank-muamalat-052025.Bank_Muamalat.Orders` o
+JOIN
+  `bank-muamalat-052025.Bank_Muamalat.Customers` c
+ON
+  o.CustomerID = c.CustomerID
+JOIN
+  `bank-muamalat-052025.Bank_Muamalat.Products` p
+ON
+  o.ProdNumber = p.ProdNumber
+JOIN
+  `bank-muamalat-052025.Bank_Muamalat.ProductCategory` pc
+ON
+  p.Category = pc.CategoryID
+ORDER BY
+  o.Date ASC
